@@ -1,1 +1,13 @@
 ---
+
+- name: "Restart the Promtail daemon"
+  tags: [promtail]
+  ansible.builtin.systemd:
+    name: promtail
+    state: restarted
+
+
+- name: "Reload the Promtail daemon configuration"
+  tags: [promtail]
+  ansible.builtin.systemd:
+    daemon_reload: true
