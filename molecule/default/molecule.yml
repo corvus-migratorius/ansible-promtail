@@ -14,6 +14,8 @@ platforms:
     privileged: true
 provisioner:
   name: ansible
+  playbooks:
+    converge: converge.yml
 verifier:
   name: ansible
 lint: |
