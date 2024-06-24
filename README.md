@@ -1,37 +1,44 @@
-template
+promtail
 =========
 
-Template for Ansible role monorepos
+Installs promtail as systemd service.
 
 Requirements
 ------------
 
-None
-
 Role Variables
 --------------
 
-None
+(all optional)
+`promtail_version`: version to install
+`loki_server`: set loki server
+`loki_port`: set loki port
+`custom_server_config`: path to custom config witch replace all config with your own
+`custom_scrape_configs`: path to custom scrape configs
 
 Dependencies
 ------------
 
-None
+No
 
 Example Playbook
 ----------------
 
-```yaml
-roles:
-    - role: genlab.template
-```
+    - hosts: servers
+      roles:
+         - role: promtail
+           promtail_version: 2.7.3
 
 License
 -------
 
-BSD
+MIT
 
 Author Information
 ------------------
+
+Alexander Gorelyshev and Danilkin Danila (MIPT)
+
+Genlab LLC
 
 corvus-migratorius@proton.me
