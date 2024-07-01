@@ -1,6 +1,5 @@
 ---
 - name: "Install packages"
-  tags: [promtail]
   ansible.builtin.apt:
     name: [ acl, unzip ]
     state: present
@@ -9,14 +8,12 @@
 
 
 - name: "Create the 'promtail' group"
-  tags: [promtail]
   ansible.builtin.group:
     name: promtail
     state: present
 
 
 - name: "Create the 'promtail' user"
-  tags: [promtail]
   ansible.builtin.user:
     name: promtail
     groups:
@@ -28,7 +25,6 @@
 
 
 - name: "Set facl to allow promtail user to read '/var/log' contents"
-  tags: [promtail]
   ansible.posix.acl:
     path: /var/log
     entity: promtail
@@ -38,7 +34,6 @@
 
 
 - name: "Make promtail user owner of '{{ promtail_positions_path }}'"
-  tags: [promtail]
   changed_when: false
   ansible.builtin.file:
     path: "{{ promtail_positions_path }}"
@@ -49,7 +44,6 @@
 
 
 - name: "Install the requested Promtail version"
-  tags: [promtail]
   block:
     - name: "Check Promtail version"
       ansible.builtin.command: /usr/bin/promtail --version
@@ -87,7 +81,6 @@
 
 
 - name: "Template the systemd unit file"
-  tags: [promtail]
   notify: "Reload the Promtail daemon configuration"
   ansible.builtin.template:
     src: promtail.service.j2
@@ -98,7 +91,6 @@
 
 
 - name: "Template Promtail config file"
-  tags: [promtail]
   notify: "Restart the Promtail daemon"
   ansible.builtin.template:
     src: templates/promtail.yml.j2
@@ -109,7 +101,6 @@
 
 
 - name: "Enable and start Promtail daemon"
-  tags: [promtail]
   ansible.builtin.systemd:
     name: promtail
     state: started
