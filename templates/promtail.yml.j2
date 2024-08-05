@@ -12,7 +12,7 @@ clients:
   - url: "http://{{  loki_server  }}:{{ loki_port }}/loki/api/v1/push"
 
 scrape_configs:
-{% if add_inventory_hosts %}
+{% if add_var_logs %}
   - job_name: system
     static_configs:
       - targets:

@@ -4,4 +4,4 @@ promtail_positions_path: /home/promtail/positions.yaml
 promtail_http_port: 9080
 loki_server: localhost
 loki_port: 3100
-add_inventory_hosts: true
+add_var_logs: true
