@@ -20,7 +20,7 @@ scrape_configs:
         labels:
           job: varlogs
           __path__: /var/log/*log
-          host: {{  inventory_hostname  }}
+          host: {{ ansible_hostname }}
 {% endif %}
 
 {% if custom_scrape_configs is defined %}
