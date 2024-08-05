@@ -12,7 +12,7 @@ clients:
   - url: "http://{{  loki_server  }}:{{ loki_port }}/loki/api/v1/push"
 
 scrape_configs:
-{% if add_inventory_hosts %}
+{% if add_var_logs %}
   - job_name: system
     static_configs:
       - targets:
@@ -20,7 +20,7 @@ scrape_configs:
         labels:
           job: varlogs
           __path__: /var/log/*log
-          host: {{  inventory_hostname  }}
+          host: {{ ansible_hostname }}
 {% endif %}
 
 {% if custom_scrape_configs is defined %}
